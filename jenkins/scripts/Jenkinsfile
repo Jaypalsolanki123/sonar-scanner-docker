@@ -2,12 +2,12 @@ pipeline {
     agent any
     parameters{
       string defaultValue: 'master', description :'', name : 'branch_name', trim: false
-      string defaultValue: 'git@github.com:VikashChoudahry/sonar-scanner-docker.git', description :'', name : 'ssh_url', trim: false
+      string defaultValue: 'github.com/Jaypalsolanki123/sonar-scanner-docker.git', description :'', name : 'ssh_url', trim: false
     }
     stages {
         stage('Pre Build') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
+                dir("/Users/jaypalsinh/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     sh 'node --version'
                     sh "rm -rf *"
                     git branch: "${branch_name}", credentialsId: "gitaccess", url: "${ssh_url}"
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
+                dir("/Users/jaypalsinh/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if ("${branch_name}" == "master") {
                           echo "I am working for branch: ${branch_name}"
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Coverage') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
+                dir("/Users/jaypalsinh/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if ("${branch_name}" == "master") {
                           echo "I am working for branch: ${branch_name}"
@@ -45,7 +45,7 @@ pipeline {
         }
         stage('Sonar Scanner') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
+                dir("/Users/jaypalsinh/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if ("${branch_name}" == "master") {
                           echo "I am working for branch: ${branch_name}"
@@ -59,7 +59,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
+                dir("/Users/jaypalsinh/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if("${branch_name}" == "master"){
                             echo "Deployment command need to be added here ..."
